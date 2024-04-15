@@ -9,20 +9,23 @@ import jakarta.persistence.MappedSuperclass
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import java.time.ZonedDateTime
+import java.time.ZonedDateTime.now
 
 @MappedSuperclass
 abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = TODO("initialize me")
-        private set
+    @Column(name = "id")
+    private var _id: Long? = null
+    val id: Long
+        get() = _id!!
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
-    var createdAt: ZonedDateTime
+    @Column(updatable = false)
+    var createdAt: ZonedDateTime = now()
 
     @LastModifiedDate
-    @Column(nullable = false)
-    var updatedAt: ZonedDateTime
+    @Column
+    var updatedAt: ZonedDateTime = now()
 }

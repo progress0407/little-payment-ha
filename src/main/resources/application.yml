@@ -1,0 +1,5 @@
+spring:
+  application.name: little-payment
+  config.import:
+    - classpath:yaml-config/secret/db.yml
+    - classpath:yaml-config/secret/portone.yml
