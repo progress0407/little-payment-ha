@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script>
+  async function makePayment() {
+    try {
+      const response = await PortOne.requestPayment({
+        storeId: "",
+        channelKey: "",
+        paymentId: `payment-${crypto.randomUUID()}`,
+        orderName: "나이키 와플 트레이너 2 SD",
+        totalAmount: 1000,
+        currency: "CURRENCY_KRW",
+        payMethod: "CARD",
+      });
+      console.log(response);
+      alert('Payment successful!');
+    } catch (error) {
+      console.error('Payment request failed:', error);
+      alert('Payment failed. Check console for details.');
+    }
+  }
+</script>
+<body>
+  <h2>Hello</h2>
+  <p><span th:text="${say}">Hi</span> Thymeleaf</p>
+  <button onclick="makePayment()">Make Payment</button>
+  <button onclick="makePayment()">aa</button>
+</body>
+</html>

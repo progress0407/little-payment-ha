@@ -1,7 +1,7 @@
 package io.philo.littlepayment.payment
 
-import io.philo.littlepayment.payment.dto.PaymentRequest
-import io.philo.littlepayment.payment.dto.PaymentResponse
+import io.philo.littlepayment.payment.dto.PortonePaymentRequest
+import io.philo.littlepayment.payment.dto.PortonePaymentResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.client.RestClient
@@ -18,12 +18,12 @@ class PortoneClient {
     /**
      * 결제 내역 단건 조회
      */
-    fun handleWebhook(@RequestBody request: PaymentRequest): PaymentResponse {
-        val body: PaymentResponse = restClient.get()
+    fun handleWebhook(@RequestBody request: PortonePaymentRequest): PortonePaymentResponse {
+        val body: PortonePaymentResponse = restClient.get()
             .uri("https://api.portone.io/payments/${request.paymentId}")
             .headers { headers -> headers.setBearerAuth("PortOne $PORTONE_API_SECRET") }
             .retrieve()
-            .body(PaymentResponse::class.java)!!
+            .body(PortonePaymentResponse::class.java)!!
 
         return body
     }
