@@ -13,3 +13,6 @@ data class PortonePaymentResponse(val id: String,
                                   val status: String,
                                   val amount: String,
                                   val method: String)
+
+data class PaymentPrepareResponse(val storeId: String,
+                                  val channelKey: String)
